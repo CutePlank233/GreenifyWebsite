@@ -12,18 +12,26 @@
 (function() {
     'use strict';
 
-    const observer = new MutationObserver(() => {
-    document.querySelectorAll('*').forEach(element => {
-        element.style.color = '#006600';
-    });
-    document.querySelectorAll('*:not(video)').forEach(element => {
-    element.style.backgroundColor = 'rgba(221, 255, 221, 0.25)';
-});
-    document.querySelectorAll('video').forEach(video => {
-    video.style.position = 'relative';
-    video.style.zIndex = '12306';
-});
-});
+    function greenifyWebsite() {
+        document.querySelectorAll('*').forEach(element => {
+            element.style.color = '#006600';
+        });
 
-observer.observe(document.body, { childList: true, subtree: true });
+        document.querySelectorAll('*:not(video)').forEach(element => {
+            element.style.backgroundColor = 'rgba(221, 255, 221, 0.25)';
+        });
+
+        document.querySelectorAll('video').forEach(video => {
+            video.style.position = 'relative';
+            video.style.zIndex = '12306';
+        });
+    }
+
+    window.addEventListener('load', () => {
+        setTimeout(greenifyWebsite, 100);
+    });
+
+    const observer = new MutationObserver(greenifyWebsite);
+    observer.observe(document.body, { childList: true, subtree: true });
+
 })();
