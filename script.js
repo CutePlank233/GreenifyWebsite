@@ -12,9 +12,18 @@
 (function() {
     'use strict';
 
-    setInterval(() => {
+    const observer = new MutationObserver(() => {
     document.querySelectorAll('*').forEach(element => {
-        element.style.color = '#00ff00';
+        element.style.color = '#006600';
     });
-}, 50);
+    document.querySelectorAll('*:not(video)').forEach(element => {
+    element.style.backgroundColor = 'rgba(221, 255, 221, 0.25)';
+});
+    document.querySelectorAll('video').forEach(video => {
+    video.style.position = 'relative';
+    video.style.zIndex = '12306';
+});
+});
+
+observer.observe(document.body, { childList: true, subtree: true });
 })();
